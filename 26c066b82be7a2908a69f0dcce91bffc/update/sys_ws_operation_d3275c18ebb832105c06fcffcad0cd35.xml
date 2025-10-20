@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>POST</http_method>
+        <name>Create Job Relatedness Case</name>
+        <operation_script><![CDATA[(function process( /*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+    checkForParams(request, response);
+
+})(request, response);
+
+function checkForParams(request, response) {
+
+    //Check for mandatory fields, return an error if any are missing or empty
+    if (nil(request.requested_for) || nil(request.jr_request_id) ||
+        nil(request.year_term) || nil(request.hro_netid) ||
+        nil(request.hro_netid) || nil(request.manager_original_netid) ||
+        nil(request.course_num_1) || nil(request.course_title_1) ||
+        nil(request.course_comments_1)) {
+        var error = "ERROR! Please include all mandatory fields";
+        response.error = error;
+        response.request_number = -1;
+        gs.log("There were empty mandatory fields.", 'JobRelated');
+        //Check if extra courses are submitted and insure that they have
+        //mandatory fields
+    } else if (checkOptCourses(request, response) == true) {
+        gs.log('Error: missing matching optional values', 'JobRelated');
+        var error1 = "ERROR! Included optional course was missing required values";
+        response.error = error1;
+        response.request_number = -1;
+    } else {
+        createRequest(request, response);
+    }
+
+    function nil(obj) {
+        if (obj == "" || obj == undefined || gs.nil(obj)) {
+            gs.log('obj: ' + obj, 'JR_Update');
+            return true;
+        }
+        return false;
+    }
+}
+
+function checkOptCourses(request, response) {
+
+    var num = "course_num_",
+        title = "course_title_",
+        comments = "course_comments_";
+
+    /*
+    only need to verify for optional courses 2-5.  If the course number
+    for course 2-5 is present, then the title and comments for that
+    course must also be present.
+    */
+    for (var i = 2; i <= 5; i++) {
+        if (!gs.nil(request[num + i]) &&
+            (request[title + i] == "" || request[comments + i] == "")) {
+            gs.log('Error: ' + (num + i) + ': ' + request[num + i] +
+                '\n' + (title + i) + ': ' + request[title + i] +
+                '\n' + comments + i + ': ' + request[comments + i], 'JobRelated');
+            return true;
+        }
+    }
+    return false;
+}
+
+
+function createRequest(request, response) {
+
+    function notNil(obj) {
+        if (!gs.nil(obj)) {
+            return obj;
+        }
+        return "";
+    }
+
+    try {
+        // sys_id of your Record Producer
+        var recordProducerSysId = "tbd";
+
+        // Build variables object
+        var variables = {
+            // "budget_adj_nbr": requestBody.budget_adj_nbr,
+            'jr_request_id': notNil(request.jr_request_id),
+            'year_term': notNil(request.year_term),
+            'date_submitted': notNil(request.date_submitted),
+            'hro_netid': notNil(request.hro_netid),
+            'send_hr_group': notNil(request.send_hr_group),
+            'manager_original_netid': notNil(request.manager_original_netid),
+            'manager_selected_netid': notNil(request.manager_selected_netid),
+            'file_name': notNil(request.file_name),
+            'file_link': notNil(request.file_link),
+            'program_desc': notNil(request.program_desc),
+            //required course 1
+            'course_num_1': notNil(request.course_num_1),
+            'course_numcredits_1': notNil(request.course_numcredits_1),
+            'course_improve_skills_1': notNil(request.course_improve_skills_1),
+            'course_title_1': notNil(request.course_title_1),
+            'course_edu_req_1': notNil(request.course_edu_req_1),
+            'course_comments_1': notNil(request.course_comments_1),
+            //optional course 2
+            'course_num_2': notNil(request.course_num_2),
+            'course_title_2': notNil(request.course_title_2),
+            'course_numcredits_2': notNil(request.course_numcredits_2),
+            'course_improve_skills_2': notNil(request.course_improve_skills_2),
+            'course_edu_req_2': notNil(request.course_edu_req_2),
+            'course_comments_2': notNil(request.course_comments_2),
+            //optional course 3
+            'course_num_3': notNil(request.course_num_3),
+            'course_title_3': notNil(request.course_title_3),
+            'course_numcredits_3': notNil(request.course_numcredits_3),
+            'course_improve_skills_3': notNil(request.course_improve_skills_3),
+            'course_edu_req_3': notNil(request.course_edu_req_3),
+            'course_comments_3': notNil(request.course_comments_3),
+            //optional course 4
+            'course_num_4': notNil(request.course_num_4),
+            'course_title_4': notNil(request.course_title_4),
+            'course_numcredits_4': notNil(request.course_numcredits_4),
+            'course_improve_skills_4': notNil(request.course_improve_skills_4),
+            'course_edu_req_4': notNil(request.course_edu_req_4),
+            'course_comments_4': notNil(request.course_comments_4),
+            //optional course 5
+            'course_num_5': notNil(request.course_num_5),
+            'course_title_5': notNil(request.course_title_5),
+            'course_numcredits_5': notNil(request.course_numcredits_5),
+            'course_improve_skills_5': notNil(request.course_improve_skills_5),
+            'course_edu_req_5': notNil(request.course_edu_req_5),
+            'course_comments_5': notNil(request.course_comments_5)
+        }
+
+        var error = '';
+
+        //set the requested for reference field
+        var gr = new GlideRecord('sys_user');
+        gr.addQuery('user_name', request.requested_for);
+        gr.query();
+
+        if (gr.next()) {
+            variables.requested_for = gr.sys_id;
+        } else {
+            error = "ERROR: Invalid netid for requested_for";
+        }
+
+        //set HR Officer
+        gr = new GlideRecord('sys_user');
+        gr.addQuery('user_name', request.hro_netid);
+        gr.query();
+
+        if (gr.next()) {
+            variables.hro = gr.sys_id;
+        } else {
+            error = "ERROR: Invalid netid for HR Officer";
+        }
+
+        //set Original Manager
+        gr = new GlideRecord('sys_user');
+        gr.addQuery('user_name', request.manager_original_netid);
+        gr.query();
+
+        if (gr.next()) {
+            variables.manager_original = gr.sys_id;
+        } else {
+            error = "ERROR: Invalid netid for Manager";
+        }
+
+        //set Selected Manager
+        if (notNil(request.manager_selected_netid) != "") {
+            gr = new GlideRecord('sys_user');
+            gr.addQuery('user_name', request.manager_selected_netid);
+            gr.query();
+
+            if (gr.next()) {
+                variables.manager_selected = gr.sys_id;
+            }
+        }
+
+        // Create catalog item API
+        var catalogItem = new sn_sc.CatItem(recordProducerSysId);
+        var values = {
+            "variables": variables,
+            "sysparm_id": recordProducerSysId
+        };
+
+        if (error == '') {
+            //submit order and return request number as response
+            var targetRecordDetails = catalogItem.submitProducer(values);
+
+            response.request_number = targetRecordDetails.number;
+            response.status = "SUCCESS";
+        } else {
+            gs.log('Error while building req item: ' + error, 'JobRelated');
+            response.error = error;
+            response.request_number = -1;
+        }
+
+    } catch (ex) {
+        response.setStatus(500);
+        response.status = "ERROR";
+        response.message = ex.message;
+    }
+
+    return response;
+}]]></operation_script>
+        <operation_uri>/api/x_neyu_jr_api/jobrelated</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>mdq204</sys_created_by>
+        <sys_created_on>2025-10-20 20:10:44</sys_created_on>
+        <sys_id>d3275c18ebb832105c06fcffcad0cd35</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Create Job Relatedness Case</sys_name>
+        <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
+        <sys_update_name>sys_ws_operation_d3275c18ebb832105c06fcffcad0cd35</sys_update_name>
+        <sys_updated_by>mdq204</sys_updated_by>
+        <sys_updated_on>2025-10-20 20:12:33</sys_updated_on>
+        <web_service_definition display_value="JobRelated">d9b61818ebb832105c06fcffcad0cd0b</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>

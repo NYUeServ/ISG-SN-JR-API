@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_neyu_jr_api.JobRelatednessAPI</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <mobile_callable>false</mobile_callable>
+        <name>JobRelatednessAPI</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var JobRelatednessAPI = Class.create();
+JobRelatednessAPI.prototype = {
+    initialize: function() {},
+    /**
+     * Update Approval API Call
+     * 
+     * @param {Object} params - Parameters object containing:
+     *   - jrReqNbr: Job Relatedness Request Number
+     *   - actionBy: Action performed by
+     *   - actionRemarks: Action remarks
+     *   - serviceLinkId: ServicelinkId
+     *   - status: Status
+     *   - apprLevel: Approval level
+     *   - assignedAppr: Assigned approver
+     *   - actionDate: Action date
+     *   - actionResult: Action result
+     * @returns {Object} Response object with error, status, and responseBody
+     */
+    updateApproval: function(params) {
+        try {
+            // Validate required parameters
+            if (!params || !params.jrReqNbr || !params.serviceLinkId) {
+                return {
+                    error: true,
+                    errorMessage: 'Missing required parameters: jrReqNbr and serviceLinkId are required',
+                    status: '400',
+                    responseBody: null
+                };
+            }
+
+
+
+            // Prepare request body
+            var requestBody = {
+                jrReqNbr: params.jrReqNbr || '',
+                actionBy: params.actionBy || '',
+                actionRemarks: params.actionRemarks || '',
+                serviceLinkId: params.serviceLinkId || '',
+                status: params.status || '',
+                apprLevel: params.apprLevel || '',
+                assignedAppr: params.assignedAppr || '',
+                actionDate: params.actionDate || '',
+                actionResult: params.actionResult || '',
+                remoteUser: '0TKg+Jk4IgirTy4cT'
+            };
+
+            // Create request configuration
+            var requestConfig = {
+                aliasId: 'a84cec58ebf832105c06fcffcad0cd1b',
+                path: '/trwfapp/jrservice/updateapproval',
+                httpMethod: 'POST',
+                content: JSON.stringify(requestBody),
+                headers: {
+                    'Content-Type': 'text/plain'
+                }
+            };
+
+            // Execute the REST call using REST Utils
+            return this._executeRestCall(requestConfig);
+
+        } catch (error) {
+            gs.error('JobRelatednessAPI.updateApproval - Error: ' + error.message);
+            return {
+                error: true,
+                errorMessage: 'Internal error occurred: ' + error.message,
+                status: '500',
+                responseBody: null
+            };
+        }
+    },
+
+    /**
+     * Private method to execute REST calls using REST Utils
+     * 
+     * @param {Object} requestConfig - Request configuration object
+     * @returns {Object} Response object
+     */
+    _executeRestCall: function(requestConfig) {
+        try {
+            // Build the REST message using REST Utils RequestBuilder
+            // RequestBuilder will handle connection alias validation internally
+            var builder = new x_neyu_rest_utils.RequestBuilder(requestConfig);
+            var restMessage = builder.build();
+
+            if (!restMessage) {
+                return {
+                    error: true,
+                    errorMessage: 'Failed to build REST message',
+                    status: '500',
+                    responseBody: null
+                };
+            }
+
+            // Execute the REST message using REST Utils WebServiceUtil
+            var webServiceUtil = new x_neyu_rest_utils.WebServiceUtil();
+            var response = webServiceUtil.executeRestMessage(restMessage);
+
+            // Log the response for debugging
+            gs.info('JobRelatednessAPI._executeRestCall - Response: ' + JSON.stringify(response));
+
+            return response;
+
+        } catch (error) {
+            gs.error('JobRelatednessAPI._executeRestCall - Error executing REST call: ' + error.message);
+            return {
+                error: true,
+                errorMessage: 'Failed to execute REST call: ' + error.message,
+                status: '500',
+                responseBody: null
+            };
+        }
+    },
+
+    type: 'JobRelatednessAPI'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>mdq204</sys_created_by>
+        <sys_created_on>2025-10-20 20:41:39</sys_created_on>
+        <sys_id>049e181cebb832105c06fcffcad0cd06</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>JobRelatednessAPI</sys_name>
+        <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
+        <sys_update_name>sys_script_include_049e181cebb832105c06fcffcad0cd06</sys_update_name>
+        <sys_updated_by>mdq204</sys_updated_by>
+        <sys_updated_on>2025-10-20 21:55:25</sys_updated_on>
+    </sys_script_include>
+</record_update>
