@@ -21,7 +21,7 @@ function checkForParams(request, response) {
         nil(request.hro_netid) || nil(request.manager_original_netid) ||
         nil(request.course_num_1) || nil(request.course_title_1) ||
         nil(request.course_comments_1)) {
-        var error = "ERROR! Please include all mandatory fields";
+        const error = "ERROR! Please include all mandatory fields";
         response.error = error;
         response.request_number = -1;
         gs.log("There were empty mandatory fields.", 'JobRelated');
@@ -29,7 +29,7 @@ function checkForParams(request, response) {
         //mandatory fields
     } else if (checkOptCourses(request, response) == true) {
         gs.log('Error: missing matching optional values', 'JobRelated');
-        var error1 = "ERROR! Included optional course was missing required values";
+        const error1 = "ERROR! Included optional course was missing required values";
         response.error = error1;
         response.request_number = -1;
     } else {
@@ -47,7 +47,7 @@ function checkForParams(request, response) {
 
 function checkOptCourses(request, response) {
 
-    var num = "course_num_",
+    const num = "course_num_",
         title = "course_title_",
         comments = "course_comments_";
 
@@ -56,7 +56,7 @@ function checkOptCourses(request, response) {
     for course 2-5 is present, then the title and comments for that
     course must also be present.
     */
-    for (var i = 2; i <= 5; i++) {
+    for (let i = 2; i <= 5; i++) {
         if (!gs.nil(request[num + i]) &&
             (request[title + i] == "" || request[comments + i] == "")) {
             gs.log('Error: ' + (num + i) + ': ' + request[num + i] +
@@ -80,10 +80,10 @@ function createRequest(request, response) {
 
     try {
         // sys_id of your Record Producer
-        var recordProducerSysId = "ebc73cb62b183610da0ef1bece91bfe2";
+        const recordProducerSysId = "ebc73cb62b183610da0ef1bece91bfe2";
 
         // Build variables object
-        var variables = {
+        const variables = {
             // "budget_adj_nbr": requestBody.budget_adj_nbr,
             'jr_request_id': notNil(request.jr_request_id),
             'year_term': notNil(request.year_term),
@@ -132,10 +132,10 @@ function createRequest(request, response) {
             'course_comments_5': notNil(request.course_comments_5)
         }
 
-        var error = '';
+        let error = '';
 
         //set the requested for reference field
-        var gr = new GlideRecord('sys_user');
+        let gr = new GlideRecord('sys_user');
         gr.addQuery('user_name', request.requested_for);
         gr.query();
 
@@ -179,15 +179,15 @@ function createRequest(request, response) {
         }
 
         // Create catalog item API
-        var catalogItem = new sn_sc.CatItem(recordProducerSysId);
-        var values = {
+        let catalogItem = new sn_sc.CatItem(recordProducerSysId);
+        const values = {
             "variables": variables,
             "sysparm_id": recordProducerSysId
         };
 
         if (error == '') {
             //submit order and return request number as response
-            var targetRecordDetails = catalogItem.submitProducer(values);
+            const targetRecordDetails = catalogItem.submitProducer(values);
 
             response.request_number = targetRecordDetails.number;
             response.status = "SUCCESS";
@@ -218,14 +218,14 @@ function createRequest(request, response) {
         <sys_created_by>mdq204</sys_created_by>
         <sys_created_on>2025-10-20 20:10:44</sys_created_on>
         <sys_id>d3275c18ebb832105c06fcffcad0cd35</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_name>Create Job Relatedness Case</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
         <sys_update_name>sys_ws_operation_d3275c18ebb832105c06fcffcad0cd35</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
-        <sys_updated_on>2025-10-20 22:51:19</sys_updated_on>
+        <sys_updated_on>2025-10-21 20:56:03</sys_updated_on>
         <web_service_definition display_value="JobRelated">d9b61818ebb832105c06fcffcad0cd0b</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
