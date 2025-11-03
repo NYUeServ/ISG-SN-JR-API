@@ -11,7 +11,7 @@
         <sandbox_callable>false</sandbox_callable>
         <script><![CDATA[var JobRelatednessAPI = Class.create();
 JobRelatednessAPI.prototype = {
-    initialize: function () { },
+    initialize: function() {},
     /**
      * Update Approval API Call
      * 
@@ -27,7 +27,7 @@ JobRelatednessAPI.prototype = {
      *   - actionResult: Action result
      * @returns {Object} Response object with error, status, and responseBody
      */
-    updateApproval: function (params) {
+    updateApproval: function(params) {
         try {
             // Validate required parameters
             if (!params || !params.jrReqNbr || !params.serviceLinkId) {
@@ -99,6 +99,7 @@ JobRelatednessAPI.prototype = {
     checkForParams: function checkForParams(request) {
 
         let response = {};
+		response.error = false;
 
         //Check for mandatory fields, return an error if any are missing or empty
         if (nil(request.requested_for) || nil(request.jr_request_id) ||
@@ -106,15 +107,17 @@ JobRelatednessAPI.prototype = {
             nil(request.hro_netid) || nil(request.manager_original_netid) ||
             nil(request.course_num_1) || nil(request.course_title_1) ||
             nil(request.course_comments_1)) {
-            const error = "ERROR! Please include all mandatory fields";
-            response.error = error;
+            const errorMessage = "ERROR! Please include all mandatory fields";
+            response.error = true;
+            response.errorMessage = errorMessage;
+            response.status = '400';
             response.request_number = -1;
-            gs.log("There were empty mandatory fields.", 'JobRelated');
+            response.responseBody = null;
+            // gs.info("There were empty mandatory fields.", 'JobRelated');
         }
 
         function nil(obj) {
             if (obj == "" || obj == undefined || gs.nil(obj)) {
-                gs.log('obj: ' + obj, 'JR_Update');
                 return true;
             }
             return false;
@@ -125,14 +128,15 @@ JobRelatednessAPI.prototype = {
 
 
     /**
-         * Check Optional Courses API Call
-         * 
-         * @param {Object} request - Request object containing optional course info
-         * @returns {Object} - Response object with error
-         */
+     * Check Optional Courses API Call
+     * 
+     * @param {Object} request - Request object containing optional course info
+     * @returns {Object} - Response object with error
+     */
     checkOptCourses: function checkOptCourses(request) {
 
-        response = {};
+        let response = {};
+		response.error = false;
 
         const num = "course_num_",
             title = "course_title_",
@@ -146,11 +150,17 @@ JobRelatednessAPI.prototype = {
         for (let i = 2; i <= 5; i++) {
             if (!gs.nil(request[num + i]) &&
                 (request[title + i] == "" || request[comments + i] == "")) {
-                gs.log('Error: ' + (num + i) + ': ' + request[num + i] +
-                    '\n' + (title + i) + ': ' + request[title + i] +
-                    '\n' + comments + i + ': ' + request[comments + i], 'JobRelated');
-                
-                    response.error = "Error: missing matching optional values";
+                // gs.info('Error: ' + (num + i) + ': ' + request[num + i] +
+                // '\n' + (title + i) + ': ' + request[title + i] +
+                // '\n' + comments + i + ': ' + request[comments + i], 'JobRelated');
+
+
+                const errorMessage = "Error: missing matching optional values";
+                response.error = true;
+                response.errorMessage = errorMessage;
+                response.status = '400';
+                response.request_number = -1;
+                response.responseBody = null;
             }
         }
         return response;
@@ -198,15 +208,15 @@ JobRelatednessAPI.prototype = {
             course_comments_5':
          * @returns {Object} Response object with error, status, and responseBody
          */
-    createRequest: function createRequest(request, response) {
-
+    createRequest: function createRequest(request) {
+		let response = {};
         try {
             // sys_id of your Record Producer
             const recordProducerSysId = "ebc73cb62b183610da0ef1bece91bfe2";
 
             // Build variables object
             const variables = {
-                // "budget_adj_nbr": requestBody.budget_adj_nbr,
+                'requested_for': this.notNil(request.requested_for),
                 'jr_request_id': this.notNil(request.jr_request_id),
                 'year_term': this.notNil(request.year_term),
                 'date_submitted': this.notNil(request.date_submitted),
@@ -254,7 +264,8 @@ JobRelatednessAPI.prototype = {
                 'course_comments_5': this.notNil(request.course_comments_5)
             }
 
-            let error = '';
+            let errorMessage = '';
+            let error = false;
 
             //set the requested for reference field
             let gr = new GlideRecord('sys_user');
@@ -264,7 +275,8 @@ JobRelatednessAPI.prototype = {
             if (gr.next()) {
                 variables.requested_for = gr.sys_id;
             } else {
-                error = "ERROR: Invalid netid for requested_for";
+                error = true;
+                errorMessage = "ERROR: Invalid netid for requested_for";
             }
 
             //set HR Officer
@@ -275,7 +287,8 @@ JobRelatednessAPI.prototype = {
             if (gr.next()) {
                 variables.hro = gr.sys_id;
             } else {
-                error = "ERROR: Invalid netid for HR Officer";
+                error = true;
+                errorMessage = "ERROR: Invalid netid for HR Officer";
             }
 
             //set Original Manager
@@ -286,7 +299,8 @@ JobRelatednessAPI.prototype = {
             if (gr.next()) {
                 variables.manager_original = gr.sys_id;
             } else {
-                error = "ERROR: Invalid netid for Manager";
+                error = true;
+                errorMessage = "ERROR: Invalid netid for Manager";
             }
 
             //set Selected Manager
@@ -307,24 +321,28 @@ JobRelatednessAPI.prototype = {
                 "sysparm_id": recordProducerSysId
             };
 
-            if (error == '') {
+            if (error == false) {
                 //submit order and return request number as response
                 const targetRecordDetails = catalogItem.submitProducer(values);
 
                 response.request_number = targetRecordDetails.number;
-                response.status = "SUCCESS";
+                response.status = "200";
+				response.error = error;
+
             } else {
-                gs.log('Error while building req item: ' + error, 'JobRelated');
-                response.error = error;
+                response.errorMessage = errorMessage;
                 response.request_number = -1;
+				response.error = error;
             }
 
         } catch (ex) {
-            response.setStatus(500);
-            response.status = "ERROR";
-            response.message = ex.message;
+            // response.setStatus(500);
+            response.status = "500";
+            response.errorMessage = ex.message;
+            response.error = true;
         }
 
+        
         return response;
     },
 
@@ -347,7 +365,7 @@ JobRelatednessAPI.prototype = {
      * @param {Object} requestConfig - Request configuration object
      * @returns {Object} Response object
      */
-    _executeRestCall: function (requestConfig) {
+    _executeRestCall: function(requestConfig) {
         try {
             // Build the REST message using REST Utils RequestBuilder
             // RequestBuilder will handle connection alias validation internally
@@ -389,13 +407,13 @@ JobRelatednessAPI.prototype = {
         <sys_created_by>mdq204</sys_created_by>
         <sys_created_on>2025-10-20 20:41:39</sys_created_on>
         <sys_id>049e181cebb832105c06fcffcad0cd06</sys_id>
-        <sys_mod_count>9</sys_mod_count>
+        <sys_mod_count>27</sys_mod_count>
         <sys_name>JobRelatednessAPI</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
         <sys_update_name>sys_script_include_049e181cebb832105c06fcffcad0cd06</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
-        <sys_updated_on>2025-10-29 16:46:20</sys_updated_on>
+        <sys_updated_on>2025-11-03 19:45:30</sys_updated_on>
     </sys_script_include>
 </record_update>

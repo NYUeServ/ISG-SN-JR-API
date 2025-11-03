@@ -11,18 +11,25 @@
 
     const api = new x_neyu_jr_api.JobRelatednessAPI();
 
-    // check params
-    const checkForParams = api.checkForParams(request);
-    // check optional courses
-    const checkOptCourses = api.checkOptCourses(request);
+	// Check required parameters
+    var paramCheck = api.checkForParams(request);
+    if (paramCheck.error == false) {
 
-    // set response error or create request
-    if (checkForParams != {}) {
-        response.error = checkForParams.error;
-    } else if (checkOptCourses != {}) {
-        response.error = checkOptCourses.error;
+		// Check optional course parameters
+        var courseCheck = api.checkOptCourses(request);
+        if (courseCheck.error == false) {
+
+			// Create record
+            var createCheck = api.createRequest(request);
+            gs.info("createRequest response:" + JSON.stringify(createCheck));
+
+        } else {
+			// Log optional course error
+            gs.info("checkOptCourses response:" + JSON.stringify(courseCheck));
+        }
     } else {
-        response = api.createRecord(request);
+		// Log required parameters error
+        gs.info("checkForParams response:" + JSON.stringify(paramCheck));
     }
 
 
@@ -40,14 +47,14 @@
         <sys_created_by>mdq204</sys_created_by>
         <sys_created_on>2025-10-20 20:10:44</sys_created_on>
         <sys_id>d3275c18ebb832105c06fcffcad0cd35</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_name>Create Job Relatedness Case</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
         <sys_update_name>sys_ws_operation_d3275c18ebb832105c06fcffcad0cd35</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
-        <sys_updated_on>2025-10-29 16:48:25</sys_updated_on>
+        <sys_updated_on>2025-11-03 16:48:20</sys_updated_on>
         <web_service_definition display_value="JobRelated">d9b61818ebb832105c06fcffcad0cd0b</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
