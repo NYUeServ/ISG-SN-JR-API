@@ -31,15 +31,15 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>0a54b4dcebf832105c06fcffcad0cd3e</sys_id>
-        <sys_mod_count>11</sys_mod_count>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>JR Update Approval</sys_name>
         <sys_overrides/>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_0a54b4dcebf832105c06fcffcad0cd3e</sys_update_name>
-        <sys_updated_by>mdq204</sys_updated_by>
-        <sys_updated_on>2025-10-20 22:48:04</sys_updated_on>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2025-11-23 15:46:51</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -271,18 +271,6 @@
         <value>{{action.actionresult}}</value>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>application</field>
-        <id>03d8bcd0eb3c32105c06fcffcad0cd32</id>
-        <sys_created_by>mdq204</sys_created_by>
-        <sys_created_on>2025-10-20 22:35:09</sys_created_on>
-        <sys_id>1fd8bcd0eb3c32105c06fcffcad0cd4d</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>mdq204</sys_updated_by>
-        <sys_updated_on>2025-10-20 22:35:09</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>apprLevel</field>
         <id>03d8bcd0eb3c32105c06fcffcad0cd32</id>
         <sys_created_by>mdq204</sys_created_by>
@@ -317,18 +305,6 @@
         <sys_updated_on>2025-10-20 22:35:09</sys_updated_on>
         <table>var__m_sys_hub_step_ext_input_03d8bcd0eb3c32105c06fcffcad0cd32</table>
         <value>{{action.jrreqnbr}}</value>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>script</field>
-        <id>03d8bcd0eb3c32105c06fcffcad0cd32</id>
-        <sys_created_by>mdq204</sys_created_by>
-        <sys_created_on>2025-10-20 22:35:09</sys_created_on>
-        <sys_id>9fd8bcd0eb3c32105c06fcffcad0cd4d</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>mdq204</sys_updated_by>
-        <sys_updated_on>2025-10-20 22:35:09</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>serviceLinkId</field>
@@ -1369,11 +1345,11 @@
         <sys_created_on>2025-10-20 22:44:44</sys_created_on>
         <sys_id>670b3854eb3c32105c06fcffcad0cd31</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Status</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_step_ext_output_03d8bcd0eb3c32105c06fcffcad0cd32_status_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:44:44</sys_updated_on>
         <url/>
@@ -1392,11 +1368,11 @@
         <sys_created_on>2025-10-20 22:44:44</sys_created_on>
         <sys_id>a70b3854eb3c32105c06fcffcad0cd2f</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Error Message</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_step_ext_output_03d8bcd0eb3c32105c06fcffcad0cd32_error_message_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:44:44</sys_updated_on>
         <url/>
@@ -1415,11 +1391,11 @@
         <sys_created_on>2025-10-20 22:44:44</sys_created_on>
         <sys_id>e30b3854eb3c32105c06fcffcad0cd2d</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Error</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_step_ext_output_03d8bcd0eb3c32105c06fcffcad0cd32_error_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:44:44</sys_updated_on>
         <url/>
@@ -2643,11 +2619,11 @@
         <sys_created_on>2025-10-20 22:30:38</sys_created_on>
         <sys_id>01d770d0eb3c32105c06fcffcad0cd81</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>assignedAppr</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_0a54b4dcebf832105c06fcffcad0cd3e_assignedappr_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:30:38</sys_updated_on>
         <url/>
@@ -2666,11 +2642,11 @@
         <sys_created_on>2025-10-20 22:30:38</sys_created_on>
         <sys_id>05d770d0eb3c32105c06fcffcad0cd72</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>actionRemarks</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_0a54b4dcebf832105c06fcffcad0cd3e_actionremarks_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:30:38</sys_updated_on>
         <url/>
@@ -2689,11 +2665,11 @@
         <sys_created_on>2025-10-20 22:30:38</sys_created_on>
         <sys_id>45d770d0eb3c32105c06fcffcad0cd7d</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>apprLevel</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_0a54b4dcebf832105c06fcffcad0cd3e_apprlevel_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:30:38</sys_updated_on>
         <url/>
@@ -2712,11 +2688,11 @@
         <sys_created_on>2025-10-20 22:30:38</sys_created_on>
         <sys_id>49d770d0eb3c32105c06fcffcad0cd6e</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>actionBy</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_0a54b4dcebf832105c06fcffcad0cd3e_actionby_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:30:38</sys_updated_on>
         <url/>
@@ -2735,11 +2711,11 @@
         <sys_created_on>2025-10-20 22:30:39</sys_created_on>
         <sys_id>5dd770d0eb3c32105c06fcffcad0cd94</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>actionResult</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_0a54b4dcebf832105c06fcffcad0cd3e_actionresult_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:30:39</sys_updated_on>
         <url/>
@@ -2758,11 +2734,11 @@
         <sys_created_on>2025-10-20 22:30:38</sys_created_on>
         <sys_id>89d770d0eb3c32105c06fcffcad0cd79</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>status</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_0a54b4dcebf832105c06fcffcad0cd3e_status_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:30:38</sys_updated_on>
         <url/>
@@ -2781,11 +2757,11 @@
         <sys_created_on>2025-10-20 22:30:38</sys_created_on>
         <sys_id>cdd770d0eb3c32105c06fcffcad0cd75</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>serviceLinkId</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_0a54b4dcebf832105c06fcffcad0cd3e_servicelinkid_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:30:38</sys_updated_on>
         <url/>
@@ -2804,11 +2780,11 @@
         <sys_created_on>2025-10-20 22:30:38</sys_created_on>
         <sys_id>cdd7b810eb3c32105c06fcffcad0cd73</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>jrReqNbr</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_0a54b4dcebf832105c06fcffcad0cd3e_jrreqnbr_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:30:38</sys_updated_on>
         <url/>
@@ -2827,11 +2803,11 @@
         <sys_created_on>2025-10-20 22:30:39</sys_created_on>
         <sys_id>d9d770d0eb3c32105c06fcffcad0cd84</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>actionDate</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_0a54b4dcebf832105c06fcffcad0cd3e_actiondate_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:30:39</sys_updated_on>
         <url/>
@@ -2851,11 +2827,11 @@
         <sys_created_on>2025-10-20 22:47:50</sys_created_on>
         <sys_id>0dcbfc54eb3c32105c06fcffcad0cdea</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Error</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_0a54b4dcebf832105c06fcffcad0cd3e_error_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:47:50</sys_updated_on>
         <url/>
@@ -2874,11 +2850,11 @@
         <sys_created_on>2025-10-20 22:47:50</sys_created_on>
         <sys_id>81cb3094eb3c32105c06fcffcad0cd01</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Status</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_0a54b4dcebf832105c06fcffcad0cd3e_status_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:47:50</sys_updated_on>
         <url/>
@@ -2897,11 +2873,11 @@
         <sys_created_on>2025-10-20 22:47:50</sys_created_on>
         <sys_id>85cbfc54eb3c32105c06fcffcad0cdfb</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Error Message</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_0a54b4dcebf832105c06fcffcad0cd3e_error_message_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:47:50</sys_updated_on>
         <url/>
@@ -2920,11 +2896,11 @@
         <sys_created_on>2025-10-20 22:30:39</sys_created_on>
         <sys_id>95d770d0eb3c32105c06fcffcad0cdbf</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Action Status</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_0a54b4dcebf832105c06fcffcad0cd3e___action_status___en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:30:39</sys_updated_on>
         <url/>
@@ -2943,11 +2919,11 @@
         <sys_created_on>2025-10-20 22:30:39</sys_created_on>
         <sys_id>ddd770d0eb3c32105c06fcffcad0cdc3</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Don't Treat as Error</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_0a54b4dcebf832105c06fcffcad0cd3e___dont_treat_as_error___en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:30:39</sys_updated_on>
         <url/>
@@ -3238,18 +3214,6 @@
         <value>{{action.actionresult}}</value>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>application</field>
-        <id>bbcb3094eb3c32105c06fcffcad0cdb8</id>
-        <sys_created_by>mdq204</sys_created_by>
-        <sys_created_on>2025-10-20 22:48:03</sys_created_on>
-        <sys_id>d4db3094eb3c32105c06fcffcad0cddd</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>mdq204</sys_updated_by>
-        <sys_updated_on>2025-10-20 22:48:03</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>apprLevel</field>
         <id>bbcb3094eb3c32105c06fcffcad0cdb8</id>
         <sys_created_by>mdq204</sys_created_by>
@@ -3284,18 +3248,6 @@
         <sys_updated_on>2025-10-20 22:48:03</sys_updated_on>
         <table>var__m_sys_hub_step_ext_input_bbcb3094eb3c32105c06fcffcad0cdb8</table>
         <value>{{action.jrreqnbr}}</value>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>script</field>
-        <id>bbcb3094eb3c32105c06fcffcad0cdb8</id>
-        <sys_created_by>mdq204</sys_created_by>
-        <sys_created_on>2025-10-20 22:48:03</sys_created_on>
-        <sys_id>58db3094eb3c32105c06fcffcad0cddd</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>mdq204</sys_updated_by>
-        <sys_updated_on>2025-10-20 22:48:03</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>serviceLinkId</field>
@@ -4336,11 +4288,11 @@
         <sys_created_on>2025-10-20 22:48:03</sys_created_on>
         <sys_id>08db3094eb3c32105c06fcffcad0cdca</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Error</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_step_ext_output_bbcb3094eb3c32105c06fcffcad0cdb8_error_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:48:03</sys_updated_on>
         <url/>
@@ -4359,11 +4311,11 @@
         <sys_created_on>2025-10-20 22:48:03</sys_created_on>
         <sys_id>c4db3094eb3c32105c06fcffcad0cdda</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Status</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_step_ext_output_bbcb3094eb3c32105c06fcffcad0cdb8_status_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:48:03</sys_updated_on>
         <url/>
@@ -4382,11 +4334,11 @@
         <sys_created_on>2025-10-20 22:48:03</sys_created_on>
         <sys_id>c8db3094eb3c32105c06fcffcad0cdd8</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Error Message</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_step_ext_output_bbcb3094eb3c32105c06fcffcad0cdb8_error_message_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:48:03</sys_updated_on>
         <url/>
@@ -5610,11 +5562,11 @@
         <sys_created_on>2025-10-20 22:48:01</sys_created_on>
         <sys_id>3bcb3094eb3c32105c06fcffcad0cda8</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>serviceLinkId</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_f7cb3094eb3c32105c06fcffcad0cd6c_servicelinkid_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:48:01</sys_updated_on>
         <url/>
@@ -5633,11 +5585,11 @@
         <sys_created_on>2025-10-20 22:48:02</sys_created_on>
         <sys_id>3bcb3094eb3c32105c06fcffcad0cdb4</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>actionResult</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_f7cb3094eb3c32105c06fcffcad0cd6c_actionresult_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:48:02</sys_updated_on>
         <url/>
@@ -5656,11 +5608,11 @@
         <sys_created_on>2025-10-20 22:48:02</sys_created_on>
         <sys_id>3fcb3094eb3c32105c06fcffcad0cdaf</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>assignedAppr</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_f7cb3094eb3c32105c06fcffcad0cd6c_assignedappr_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:48:02</sys_updated_on>
         <url/>
@@ -5679,11 +5631,11 @@
         <sys_created_on>2025-10-20 22:48:01</sys_created_on>
         <sys_id>73cb3094eb3c32105c06fcffcad0cda6</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>actionRemarks</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_f7cb3094eb3c32105c06fcffcad0cd6c_actionremarks_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:48:01</sys_updated_on>
         <url/>
@@ -5702,11 +5654,11 @@
         <sys_created_on>2025-10-20 22:48:02</sys_created_on>
         <sys_id>77cb3094eb3c32105c06fcffcad0cdad</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>apprLevel</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_f7cb3094eb3c32105c06fcffcad0cd6c_apprlevel_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:48:02</sys_updated_on>
         <url/>
@@ -5725,11 +5677,11 @@
         <sys_created_on>2025-10-20 22:48:02</sys_created_on>
         <sys_id>b3cb3094eb3c32105c06fcffcad0cdb2</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>actionDate</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_f7cb3094eb3c32105c06fcffcad0cd6c_actiondate_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:48:02</sys_updated_on>
         <url/>
@@ -5748,11 +5700,11 @@
         <sys_created_on>2025-10-20 22:48:01</sys_created_on>
         <sys_id>bfcb3094eb3c32105c06fcffcad0cd71</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>actionBy</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_f7cb3094eb3c32105c06fcffcad0cd6c_actionby_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:48:01</sys_updated_on>
         <url/>
@@ -5771,11 +5723,11 @@
         <sys_created_on>2025-10-20 22:48:01</sys_created_on>
         <sys_id>f7cb3094eb3c32105c06fcffcad0cd6f</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>jrReqNbr</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_f7cb3094eb3c32105c06fcffcad0cd6c_jrreqnbr_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:48:01</sys_updated_on>
         <url/>
@@ -5794,11 +5746,11 @@
         <sys_created_on>2025-10-20 22:48:02</sys_created_on>
         <sys_id>ffcb3094eb3c32105c06fcffcad0cdaa</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>status</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_f7cb3094eb3c32105c06fcffcad0cd6c_status_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:48:02</sys_updated_on>
         <url/>
@@ -5818,11 +5770,11 @@
         <sys_created_on>2025-10-20 22:48:03</sys_created_on>
         <sys_id>1cdb3094eb3c32105c06fcffcad0cde1</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Error</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_f7cb3094eb3c32105c06fcffcad0cd6c_error_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:48:03</sys_updated_on>
         <url/>
@@ -5841,11 +5793,11 @@
         <sys_created_on>2025-10-20 22:48:03</sys_created_on>
         <sys_id>58db3094eb3c32105c06fcffcad0cdf0</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Action Status</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_f7cb3094eb3c32105c06fcffcad0cd6c___action_status___en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:48:03</sys_updated_on>
         <url/>
@@ -5864,11 +5816,11 @@
         <sys_created_on>2025-10-20 22:48:03</sys_created_on>
         <sys_id>5cdb3094eb3c32105c06fcffcad0cdf6</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Don't Treat as Error</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_f7cb3094eb3c32105c06fcffcad0cd6c___dont_treat_as_error___en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:48:03</sys_updated_on>
         <url/>
@@ -5887,11 +5839,11 @@
         <sys_created_on>2025-10-20 22:48:03</sys_created_on>
         <sys_id>9cdb3094eb3c32105c06fcffcad0cdf2</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Error Message</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_f7cb3094eb3c32105c06fcffcad0cd6c_error_message_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:48:03</sys_updated_on>
         <url/>
@@ -5910,11 +5862,11 @@
         <sys_created_on>2025-10-20 22:48:03</sys_created_on>
         <sys_id>d0db3094eb3c32105c06fcffcad0cdf9</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Status</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_f7cb3094eb3c32105c06fcffcad0cd6c_status_en</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-10-20 22:48:03</sys_updated_on>
         <url/>
