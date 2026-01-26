@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_neyu_jr_api.JobRelatednessAPI</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <mobile_callable>false</mobile_callable>
+        <name>JobRelatednessAPI</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var JobRelatednessAPI = Class.create();
+JobRelatednessAPI.prototype = {
+    initialize: function() {},
+    /**
+     * Update Approval API Call
+     * 
+     * @param {Object} params - Parameters object containing:
+     *   - jrReqNbr: Job Relatedness Request Number
+     *   - actionBy: Action performed by
+     *   - actionRemarks: Action remarks
+     *   - serviceLinkId: ServicelinkId
+     *   - status: Status
+     *   - apprLevel: Approval level
+     *   - assignedAppr: Assigned approver
+     *   - actionDate: Action date
+     *   - actionResult: Action result
+     * @returns {Object} Response object with error, status, and responseBody
+     */
+    updateApproval: function(params) {
+        try {
+            // Validate required parameters
+            if (!params || !params.jrReqNbr || !params.serviceLinkId) {
+                return {
+                    error: true,
+                    errorMessage: 'Missing required parameters: jrReqNbr and serviceLinkId are required',
+                    status: '400',
+                    responseBody: null
+                };
+            }
+
+
+
+            // Prepare request body
+            const requestBody = {
+                jrReqNbr: params.jrReqNbr || '',
+                actionBy: params.actionBy || '',
+                actionRemarks: params.actionRemarks || '',
+                serviceLinkId: params.serviceLinkId || '',
+                status: params.status || '',
+                apprLevel: params.apprLevel || '',
+                assignedAppr: params.assignedAppr || '',
+                actionDate: params.actionDate || '',
+                actionResult: params.actionResult || '',
+                remoteUser: '0TKg+Jk4IgirTy4cT'
+            };
+
+            // Create request configuration
+            const requestConfig = {
+                aliasId: 'a84cec58ebf832105c06fcffcad0cd1b',
+                path: '/trwfapp/jrservice/updateapproval',
+                httpMethod: 'POST',
+                content: JSON.stringify(requestBody),
+                headers: {
+                    'Content-Type': 'text/plain'
+                }
+            };
+
+            // Execute the REST call using REST Utils
+            return this._executeRestCall(requestConfig);
+
+        } catch (error) {
+            gs.error('Error: ' + error.message);
+            return {
+                error: true,
+                errorMessage: 'Internal error occurred: ' + error.message,
+                status: '500',
+                responseBody: null
+            };
+        }
+    },
+
+
+    /**
+     * Check For Params API Call
+     * 
+     * @param {Object} request - request object containing:
+     *  requested_for:
+     *  jr_request_id:
+        year_term:
+        hro_netid:
+        hro_netid:
+        manager_original_netid:
+        course_num_1:
+        course_title_1:
+        course_comments_1:
+     * @returns {Object} Response object with error, request number
+     */
+    checkForParams: function checkForParams(request) {
+
+        let response = {};
+		response.error = false;
+
+        //Check for mandatory fields, return an error if any are missing or empty
+        if (nil(request.requested_for) || nil(request.jr_request_id) ||
+            nil(request.year_term) || nil(request.hro_netid) ||
+            nil(request.hro_netid) || nil(request.manager_original_netid) ||
+            nil(request.course_num_1) || nil(request.course_title_1) ||
+            nil(request.course_comments_1)) {
+            const errorMessage = "ERROR! Please include all mandatory fields";
+            response.error = true;
+            response.errorMessage = errorMessage;
+            response.status = '400';
+            response.request_number = -1;
+            response.responseBody = null;
+            // gs.info("There were empty mandatory fields.", 'JobRelated');
+        }
+
+        function nil(obj) {
+            if (obj == "" || obj == undefined || gs.nil(obj)) {
+                return true;
+            }
+            return false;
+        }
+
+        return response;
+    },
+
+
+    /**
+     * Check Optional Courses API Call
+     * 
+     * @param {Object} request - Request object containing optional course info
+     * @returns {Object} - Response object with error
+     */
+    checkOptCourses: function checkOptCourses(request) {
+
+        let response = {};
+		response.error = false;
+
+        const num = "course_num_",
+            title = "course_title_",
+            comments = "course_comments_";
+
+        /*
+        only need to verify for optional courses 2-5.  If the course number
+        for course 2-5 is present, then the title and comments for that
+        course must also be present.
+        */
+        for (let i = 2; i <= 5; i++) {
+            if (!gs.nil(request[num + i]) &&
+                (request[title + i] == "" || request[comments + i] == "")) {
+                // gs.info('Error: ' + (num + i) + ': ' + request[num + i] +
+                // '\n' + (title + i) + ': ' + request[title + i] +
+                // '\n' + comments + i + ': ' + request[comments + i], 'JobRelated');
+
+
+                const errorMessage = "Error: missing matching optional values";
+                response.error = true;
+                response.errorMessage = errorMessage;
+                response.status = '400';
+                response.request_number = -1;
+                response.responseBody = null;
+            }
+        }
+        return response;
+    },
+
+    /**
+         * Create Request API Call
+         * 
+         * @param {Object} request - request object containing:
+         *  requested_for:
+         *  jr_request_id:
+            year_term:
+            hro_netid:
+            hro_netid:
+            manager_original_netid:
+            course_num_1:
+            course_title_1:
+            course_numcredits_1:
+            course_improve_skills_1:
+            course_edu_req_1:
+            course_comments_1:
+            course_num_2:
+            course_title_2:
+            course_numcredits_2:
+            course_improve_skills_2:
+            course_edu_req_2:
+            course_comments_2:
+            course_num_3:
+            course_title_3:
+            course_numcredits_3:
+            course_improve_skills_3:
+            course_edu_req_3:
+            course_comments_3:
+            course_num_4:
+            course_title_4:
+            course_numcredits_4:
+            course_improve_skills_4:
+            course_edu_req_4:
+            course_comments_4:
+            course_num_5':
+            course_title_5:
+            course_numcredits_5:
+            course_improve_skills_5:
+            course_edu_req_5:
+            course_comments_5':
+         * @returns {Object} Response object with error, status, and responseBody
+         */
+    createRequest: function createRequest(request) {
+		let response = {};
+        try {
+            // sys_id of your Record Producer
+            const recordProducerSysId = "ebc73cb62b183610da0ef1bece91bfe2";
+
+            // Build variables object
+            const variables = {
+                'requested_for': this.notNil(request.requested_for),
+                'jr_request_id': this.notNil(request.jr_request_id),
+                'year_term': this.notNil(request.year_term),
+                'date_submitted': this.notNil(request.date_submitted),
+                'hro_netid': this.notNil(request.hro_netid),
+                'send_hr_group': this.notNil(request.send_hr_group),
+                'manager_original_netid': this.notNil(request.manager_original_netid),
+                'manager_selected_netid': this.notNil(request.manager_selected_netid),
+                'file_name': this.notNil(request.file_name),
+                'file_link': this.notNil(request.file_link),
+                'program_desc': this.notNil(request.program_desc),
+                //required course 1
+                'course_num_1': this.notNil(request.course_num_1),
+                'course_numcredits_1': this.notNil(request.course_numcredits_1),
+                'course_improve_skills_1': this.notNil(request.course_improve_skills_1),
+                'course_title_1': this.notNil(request.course_title_1),
+                'course_edu_req_1': this.notNil(request.course_edu_req_1),
+                'course_comments_1': this.notNil(request.course_comments_1),
+                //optional course 2
+                'course_num_2': this.notNil(request.course_num_2),
+                'course_title_2': this.notNil(request.course_title_2),
+                'course_numcredits_2': this.notNil(request.course_numcredits_2),
+                'course_improve_skills_2': this.notNil(request.course_improve_skills_2),
+                'course_edu_req_2': this.notNil(request.course_edu_req_2),
+                'course_comments_2': this.notNil(request.course_comments_2),
+                //optional course 3
+                'course_num_3': this.notNil(request.course_num_3),
+                'course_title_3': this.notNil(request.course_title_3),
+                'course_numcredits_3': this.notNil(request.course_numcredits_3),
+                'course_improve_skills_3': this.notNil(request.course_improve_skills_3),
+                'course_edu_req_3': this.notNil(request.course_edu_req_3),
+                'course_comments_3': this.notNil(request.course_comments_3),
+                //optional course 4
+                'course_num_4': this.notNil(request.course_num_4),
+                'course_title_4': this.notNil(request.course_title_4),
+                'course_numcredits_4': this.notNil(request.course_numcredits_4),
+                'course_improve_skills_4': this.notNil(request.course_improve_skills_4),
+                'course_edu_req_4': this.notNil(request.course_edu_req_4),
+                'course_comments_4': this.notNil(request.course_comments_4),
+                //optional course 5
+                'course_num_5': this.notNil(request.course_num_5),
+                'course_title_5': this.notNil(request.course_title_5),
+                'course_numcredits_5': this.notNil(request.course_numcredits_5),
+                'course_improve_skills_5': this.notNil(request.course_improve_skills_5),
+                'course_edu_req_5': this.notNil(request.course_edu_req_5),
+                'course_comments_5': this.notNil(request.course_comments_5)
+            }
+
+            let errorMessage = '';
+            let error = false;
+
+            //set the requested for reference field
+            let gr = new GlideRecord('sys_user');
+            gr.addQuery('user_name', request.requested_for);
+            gr.query();
+
+            if (gr.next()) {
+                variables.requested_for = gr.sys_id;
+            } else {
+                error = true;
+                errorMessage = "ERROR: Invalid netid for requested_for";
+            }
+
+            //set HR Officer
+            gr = new GlideRecord('sys_user');
+            gr.addQuery('user_name', request.hro_netid);
+            gr.query();
+
+            if (gr.next()) {
+                variables.hro = gr.sys_id;
+            } else {
+                error = true;
+                errorMessage = "ERROR: Invalid netid for HR Officer";
+            }
+
+            //set Original Manager
+            gr = new GlideRecord('sys_user');
+            gr.addQuery('user_name', request.manager_original_netid);
+            gr.query();
+
+            if (gr.next()) {
+                variables.manager_original = gr.sys_id;
+            } else {
+                error = true;
+                errorMessage = "ERROR: Invalid netid for Manager";
+            }
+
+            //set Selected Manager
+            if (this.notNil(request.manager_selected_netid) != "") {
+                gr = new GlideRecord('sys_user');
+                gr.addQuery('user_name', request.manager_selected_netid);
+                gr.query();
+
+                if (gr.next()) {
+                    variables.manager_selected = gr.sys_id;
+                }
+            }
+
+            // Create catalog item API
+            let catalogItem = new sn_sc.CatItem(recordProducerSysId);
+            const values = {
+                "variables": variables,
+                "sysparm_id": recordProducerSysId
+            };
+
+            if (error == false) {
+                //submit order and return request number as response
+                const targetRecordDetails = catalogItem.submitProducer(values);
+
+                response.request_number = targetRecordDetails.number;
+                response.status = "200";
+				response.error = error;
+
+            } else {
+                response.errorMessage = errorMessage;
+                response.request_number = -1;
+				response.error = error;
+            }
+
+        } catch (ex) {
+            // response.setStatus(500);
+            response.status = "500";
+            response.errorMessage = ex.message;
+            response.error = true;
+        }
+
+        
+        return response;
+    },
+
+    /**
+     * 
+     * @param {Object} obj - request parameter object
+     * @returns {Object} - response object
+     */
+
+    notNil: function notNil(obj) {
+        if (!gs.nil(obj)) {
+            return obj;
+        }
+        return "";
+    },
+
+    /**
+     * Private method to execute REST calls using REST Utils
+     * 
+     * @param {Object} requestConfig - Request configuration object
+     * @returns {Object} Response object
+     */
+    _executeRestCall: function(requestConfig) {
+        try {
+            // Build the REST message using REST Utils RequestBuilder
+            // RequestBuilder will handle connection alias validation internally
+            const builder = new x_neyu_rest_utils.RequestBuilder(requestConfig);
+            const restMessage = builder.build();
+
+            if (!restMessage) {
+                return {
+                    error: true,
+                    errorMessage: 'Failed to build REST message',
+                    status: '500',
+                    responseBody: null
+                };
+            }
+
+            // Execute the REST message using REST Utils WebServiceUtil
+            const webServiceUtil = new x_neyu_rest_utils.WebServiceUtil();
+            const response = webServiceUtil.executeRestMessage(restMessage);
+
+            // Log the response for debugging
+            gs.info('Response: ' + JSON.stringify(response));
+
+            return response;
+
+        } catch (error) {
+            gs.error('Error executing REST call: ' + error.message);
+            return {
+                error: true,
+                errorMessage: 'Failed to execute REST call: ' + error.message,
+                status: '500',
+                responseBody: null
+            };
+        }
+    },
+
+    type: 'JobRelatednessAPI'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>mdq204</sys_created_by>
+        <sys_created_on>2025-10-20 20:41:39</sys_created_on>
+        <sys_id>049e181cebb832105c06fcffcad0cd06</sys_id>
+        <sys_mod_count>27</sys_mod_count>
+        <sys_name>JobRelatednessAPI</sys_name>
+        <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
+        <sys_update_name>sys_script_include_049e181cebb832105c06fcffcad0cd06</sys_update_name>
+        <sys_updated_by>mdq204</sys_updated_by>
+        <sys_updated_on>2025-11-03 19:45:30</sys_updated_on>
+    </sys_script_include>
+</record_update>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>39ecc3e5eb9af2105c06fcffcad0cdc9</enforce_acl>
+        <http_method>POST</http_method>
+        <name>Create Job Relatedness Case</name>
+        <operation_script><![CDATA[(function process( /*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+    const api = new x_neyu_jr_api.JobRelatednessAPI();
+
+	// Check required parameters
+    var paramCheck = api.checkForParams(request);
+    if (paramCheck.error == false) {
+
+		// Check optional course parameters
+        var courseCheck = api.checkOptCourses(request);
+        if (courseCheck.error == false) {
+
+			// Create record
+            var createCheck = api.createRequest(request);
+            gs.info("createRequest response:" + JSON.stringify(createCheck));
+
+        } else {
+			// Log optional course error
+            gs.info("checkOptCourses response:" + JSON.stringify(courseCheck));
+        }
+    } else {
+		// Log required parameters error
+        gs.info("checkForParams response:" + JSON.stringify(paramCheck));
+    }
+
+
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_neyu_jr_api/jobrelated</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>mdq204</sys_created_by>
+        <sys_created_on>2025-10-20 20:10:44</sys_created_on>
+        <sys_id>d3275c18ebb832105c06fcffcad0cd35</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>Create Job Relatedness Case</sys_name>
+        <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
+        <sys_update_name>sys_ws_operation_d3275c18ebb832105c06fcffcad0cd35</sys_update_name>
+        <sys_updated_by>mdq204</sys_updated_by>
+        <sys_updated_on>2026-01-07 20:11:53</sys_updated_on>
+        <web_service_definition display_value="JobRelated">d9b61818ebb832105c06fcffcad0cd0b</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>
