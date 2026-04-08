@@ -400,12 +400,16 @@ JobRelatednessAPI.prototype = {
                 response.error = true;
 
                 // Extract a snippet from the responseBody
-            if (!gs.nil(response.responseBody)) {
-                response.errorMessage = this._getErrorMessageSnippet(response.responseBody, statusCode);
-            } else {
-                response.errorMessage = "Remote server returned status " + statusCode + " with no body.";
+                if (!gs.nil(response.responseBody)) {
+                    response.errorMessage = this._getErrorMessageSnippet(response.responseBody, statusCode);
+                } else {
+                    response.errorMessage = "Remote server returned status " + statusCode + " with no body.";
+                }
             }
-            }
+			if (statusCode === 200 && response.responseBody === "N") {
+				response.error = true;
+				response.errorMessage = "BPAS returned 'N', failure to update JR approval. Expected 'Y'.";
+			}
 
             return response;
 
@@ -420,31 +424,31 @@ JobRelatednessAPI.prototype = {
         }
     },
 
-/**
- * Private method to extract error message from HTML response
- */
-_getErrorMessageSnippet: function(body, status) {
-    // See if it's HTML and grab the <title>
-    const titleMatch = body.match(/<title>(.*?)<\/title>/i);
-    if (titleMatch && titleMatch[1]) {
-        return "Server Error (" + status + "): " + titleMatch[1];
-    }
-    // Otherwise eturn the first 120 characters of the raw text
-    return "Raw Response: " + body.substring(0, 120).replace(/\s+/g, ' ') + "...";
-},
+    /**
+     * Private method to extract error message from HTML response
+     */
+    _getErrorMessageSnippet: function(body, status) {
+        // See if it's HTML and grab the <title>
+        const titleMatch = body.match(/<title>(.*?)<\/title>/i);
+        if (titleMatch && titleMatch[1]) {
+            return "Server Error (" + status + "): " + titleMatch[1];
+        }
+        // Otherwise eturn the first 120 characters of the raw text
+        return "Raw Response: " + body.substring(0, 120).replace(/\s+/g, ' ') + "...";
+    },
     type: 'JobRelatednessAPI'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>mdq204</sys_created_by>
         <sys_created_on>2025-10-20 20:41:39</sys_created_on>
         <sys_id>049e181cebb832105c06fcffcad0cd06</sys_id>
-        <sys_mod_count>37</sys_mod_count>
+        <sys_mod_count>39</sys_mod_count>
         <sys_name>JobRelatednessAPI</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
         <sys_update_name>sys_script_include_049e181cebb832105c06fcffcad0cd06</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
-        <sys_updated_on>2026-04-06 23:21:05</sys_updated_on>
+        <sys_updated_on>2026-04-08 23:52:14</sys_updated_on>
     </sys_script_include>
 </record_update>
