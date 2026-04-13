@@ -99,7 +99,7 @@ JobRelatednessAPI.prototype = {
     checkForParams: function checkForParams(request) {
 
         let response = {};
-		response.error = false;
+        response.error = false;
 
         //Check for mandatory fields, return an error if any are missing or empty
         if (nil(request.requested_for) || nil(request.jr_request_id) ||
@@ -136,7 +136,7 @@ JobRelatednessAPI.prototype = {
     checkOptCourses: function checkOptCourses(request) {
 
         let response = {};
-		response.error = false;
+        response.error = false;
 
         const num = "course_num_",
             title = "course_title_",
@@ -209,21 +209,25 @@ JobRelatednessAPI.prototype = {
          * @returns {Object} Response object with error, status, and responseBody
          */
     createRequest: function createRequest(request) {
-		let response = {};
+        let response = {};
         try {
             // sys_id of your Record Producer
             const recordProducerSysId = "ebc73cb62b183610da0ef1bece91bfe2";
 
+            // generate date_submitted
+            var gd = new GlideDate();
+            var currentDate = gd.getValue();
+
             // Build variables object
             const variables = {
-                'requested_for': this.notNil(request.requested_for),
+                'requestor': this.notNil(request.requested_for),
                 'jr_request_id': this.notNil(request.jr_request_id),
                 'year_term': this.notNil(request.year_term),
-                'date_submitted': this.notNil(request.date_submitted),
-                'hro_netid': this.notNil(request.hro_netid),
+                'date_submitted': currentDate,
+                'hro': this.notNil(request.hro_netid),
                 'send_hr_group': this.notNil(request.send_hr_group),
-                'manager_original_netid': this.notNil(request.manager_original_netid),
-                'manager_selected_netid': this.notNil(request.manager_selected_netid),
+                'original_manager': this.notNil(request.manager_original_netid),
+                'selected_manager': this.notNil(request.manager_selected_netid),
                 'file_name': this.notNil(request.file_name),
                 'file_link': this.notNil(request.file_link),
                 'program_desc': this.notNil(request.program_desc),
@@ -262,7 +266,7 @@ JobRelatednessAPI.prototype = {
                 'course_improve_skills_5': this.notNil(request.course_improve_skills_5),
                 'course_edu_req_5': this.notNil(request.course_edu_req_5),
                 'course_comments_5': this.notNil(request.course_comments_5)
-            }
+            };
 
             let errorMessage = '';
             let error = false;
@@ -273,7 +277,7 @@ JobRelatednessAPI.prototype = {
             gr.query();
 
             if (gr.next()) {
-                variables.requested_for = gr.sys_id;
+                variables.requestor = gr.getUniqueValue();
             } else {
                 error = true;
                 errorMessage = "ERROR: Invalid netid for requested_for";
@@ -285,10 +289,10 @@ JobRelatednessAPI.prototype = {
             gr.query();
 
             if (gr.next()) {
-                variables.hro = gr.sys_id;
+                variables.hro = gr.getUniqueValue();
             } else {
                 error = true;
-                errorMessage = "ERROR: Invalid netid for HR Officer";
+                errorMessage = "ERROR: Invalid netid for hro_netid";
             }
 
             //set Original Manager
@@ -297,10 +301,10 @@ JobRelatednessAPI.prototype = {
             gr.query();
 
             if (gr.next()) {
-                variables.manager_original = gr.sys_id;
+                variables.original_manager = gr.getUniqueValue();
             } else {
                 error = true;
-                errorMessage = "ERROR: Invalid netid for Manager";
+                errorMessage = "ERROR: Invalid netid for manager_original_netid";
             }
 
             //set Selected Manager
@@ -310,7 +314,10 @@ JobRelatednessAPI.prototype = {
                 gr.query();
 
                 if (gr.next()) {
-                    variables.manager_selected = gr.sys_id;
+                    variables.selected_manager = gr.getUniqueValue();
+                } else {
+                    error = true;
+                    errorMessage = "ERROR: Invalid netid for manager_selected_netid";
                 }
             }
 
@@ -327,12 +334,12 @@ JobRelatednessAPI.prototype = {
 
                 response.request_number = targetRecordDetails.number;
                 response.status = "200";
-				response.error = error;
+                response.error = error;
 
             } else {
                 response.errorMessage = errorMessage;
                 response.request_number = -1;
-				response.error = error;
+                response.error = error;
             }
 
         } catch (ex) {
@@ -342,7 +349,7 @@ JobRelatednessAPI.prototype = {
             response.error = true;
         }
 
-        
+
         return response;
     },
 
@@ -388,6 +395,22 @@ JobRelatednessAPI.prototype = {
             // Log the response for debugging
             gs.info('Response: ' + JSON.stringify(response));
 
+            var statusCode = parseInt(response.status);
+            if (statusCode < 200 || statusCode >= 300) {
+                response.error = true;
+
+                // Extract a snippet from the responseBody
+                if (!gs.nil(response.responseBody)) {
+                    response.errorMessage = this._getErrorMessageSnippet(response.responseBody, statusCode);
+                } else {
+                    response.errorMessage = "Remote server returned status " + statusCode + " with no body.";
+                }
+            }
+			if (statusCode === 200 && response.responseBody === "N") {
+				response.error = true;
+				response.errorMessage = "BPAS returned 'N', failure to update JR approval. Expected 'Y'.";
+			}
+
             return response;
 
         } catch (error) {
@@ -401,19 +424,31 @@ JobRelatednessAPI.prototype = {
         }
     },
 
+    /**
+     * Private method to extract error message from HTML response
+     */
+    _getErrorMessageSnippet: function(body, status) {
+        // See if it's HTML and grab the <title>
+        const titleMatch = body.match(/<title>(.*?)<\/title>/i);
+        if (titleMatch && titleMatch[1]) {
+            return "Server Error (" + status + "): " + titleMatch[1];
+        }
+        // Otherwise eturn the first 120 characters of the raw text
+        return "Raw Response: " + body.substring(0, 120).replace(/\s+/g, ' ') + "...";
+    },
     type: 'JobRelatednessAPI'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>mdq204</sys_created_by>
         <sys_created_on>2025-10-20 20:41:39</sys_created_on>
         <sys_id>049e181cebb832105c06fcffcad0cd06</sys_id>
-        <sys_mod_count>27</sys_mod_count>
+        <sys_mod_count>39</sys_mod_count>
         <sys_name>JobRelatednessAPI</sys_name>
         <sys_package display_value="Job Relatedness API" source="x_neyu_jr_api">26c066b82be7a2908a69f0dcce91bffc</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Job Relatedness API">26c066b82be7a2908a69f0dcce91bffc</sys_scope>
         <sys_update_name>sys_script_include_049e181cebb832105c06fcffcad0cd06</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
-        <sys_updated_on>2025-11-03 19:45:30</sys_updated_on>
+        <sys_updated_on>2026-04-08 23:52:14</sys_updated_on>
     </sys_script_include>
 </record_update>
