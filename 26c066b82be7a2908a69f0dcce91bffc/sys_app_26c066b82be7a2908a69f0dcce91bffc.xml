@@ -24,7 +24,7 @@
         <scoped_administration>false</scoped_administration>
         <short_description>Job Relatedness API</short_description>
         <source>x_neyu_jr_api</source>
-        <store_correlation_id>REPOAPP0002507464</store_correlation_id>
+        <store_correlation_id>REPOAPP0002509624</store_correlation_id>
         <store_url/>
         <subscription_entitlement/>
         <sys_class_name>sys_app</sys_class_name>
@@ -32,16 +32,16 @@
         <sys_created_by>mdq204</sys_created_by>
         <sys_created_on>2025-08-21 16:07:42</sys_created_on>
         <sys_id>26c066b82be7a2908a69f0dcce91bffc</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>7</sys_mod_count>
         <sys_updated_by>mdq204</sys_updated_by>
-        <sys_updated_on>2026-04-13 17:51:47</sys_updated_on>
+        <sys_updated_on>2026-04-14 19:57:18</sys_updated_on>
         <template/>
         <trackable>true</trackable>
         <uninstall_blocked>false</uninstall_blocked>
         <user_role/>
         <vendor/>
         <vendor_prefix/>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </sys_app>
     <sys_translated_text action="delete_multiple" query="documentkey=26c066b82be7a2908a69f0dcce91bffc"/>
 </record_update>
