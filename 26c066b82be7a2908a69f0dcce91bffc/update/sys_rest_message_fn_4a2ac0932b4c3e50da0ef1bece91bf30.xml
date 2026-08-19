@@ -36,6 +36,7 @@
         <sys_update_name>sys_rest_message_fn_4a2ac0932b4c3e50da0ef1bece91bf30</sys_update_name>
         <sys_updated_by>mdq204</sys_updated_by>
         <sys_updated_on>2025-09-22 20:15:35</sys_updated_on>
+        <use_auth_mid_server/>
         <use_basic_auth>false</use_basic_auth>
         <use_mid_server/>
         <use_mutual_auth>false</use_mutual_auth>
